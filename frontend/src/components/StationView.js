@@ -15,7 +15,7 @@ const stationViewColumns = [
   { field: 'return', headerName: 'Return', width: 200, valueGetter: getDateString },
   { field: 'departure_station_name', headerName: 'Depareure Station', width: 150 },
   { field: 'return_station_name', headerName: 'Return Station', width: 150 }
-]
+];
 
 const StationView = () => {
   const { id } = useParams();
@@ -31,11 +31,11 @@ const StationView = () => {
     }
     )   
     .catch((err) => console.log(err))
-  },[id])
+  },[id]);
   
   useEffect(() => {
     console.log(station?.station?.name)
-  }, [station])
+  }, [station]);
 
   return (
     <div>
