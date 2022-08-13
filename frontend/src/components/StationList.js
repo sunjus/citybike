@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
-//  { field: 'departure', headerName: 'Departure', valueGetter: (v) => v ? (new Date(v)).toISOString(): 'N/A' },  
 const stationColumns = [
   { field: 'id', headerName: 'ID' },
   { field: 'fid', headerName: 'FID' },
@@ -15,26 +14,45 @@ const stationColumns = [
   { field: 'y', headerName: 'Y', width: 100 }
 ];
 
+function usePagedData(url, setData) {
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(50);
+  
+  useEffect(() => {
+    console.log('DEBUG: ', `${url}?page=${page+1}&limit=${pageSize}`);
+    fetch(`${url}?page=${page}&limit=${pageSize}`)
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err))
+  }, [page, pageSize]);
+  return {page, pageSize, setPage, setPageSize}
+}
+
 function StationList() {
   const [stationList, setStationList] = useState([]);
-  const urlStation = "http://localhost:3000/api/station/list";
-
-  useEffect(() => {
-    fetch(urlStation)
-    .then((response) => response.json())
-    .then((data) => setStationList(data))
-    .catch((err) => console.log(err))
-  },[]);
-
-  useEffect(() => {
-    console.log(stationList?.station?.data)
-  }, [stationList]);
-
+  const baseUrl = "http://localhost:3000/api"
+  const urlStation = `${baseUrl}/station/list`;
+  const {page, pageSize, setPage, setPageSize} = usePagedData(urlStation, setStationList);
+  
   return (
-    <div style = {{width: '100%', height: '100vh'}}>
-      <DataGrid rows={stationList?.station?.data || []} columns={stationColumns} />
+    <div style={{ height: '80vh', width: '100%' }}>
+      <div style={{ display: 'flex', height: '100%' }}>
+        <div style={{ flexGrow: 1 }}>
+        <DataGrid
+          rows={stationList?.station?.data || []}
+          rowCount={stationList?.station?.count || 0}
+          columns={stationColumns}
+          pagination
+          paginationMode="server"
+          page={page}
+          pageSize={pageSize}
+          onPageChange={(newPage) => setPage(newPage)}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+        />
+        </div>
+      </div>
     </div>
-  );
+  )
 }
 
 export default StationList;

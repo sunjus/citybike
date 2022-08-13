@@ -77,18 +77,31 @@ app.get('/api/station/list', (req, res) => {
   if (!columnStation.includes(orderBy)) {
     orderBy = 'id';
   }
-  const prepare = db.prepare(`SELECT * FROM station ORDER BY ${orderBy} ASC LIMIT ?, ?`);
+  let prepare = db.prepare(`SELECT count(*) as count FROM station`);
+  const {count} = prepare.get();
+
+  prepare = db.prepare(`SELECT * FROM station ORDER BY ${orderBy} ASC LIMIT ?, ?`);
   const stationList = prepare.all((page - 1) * limit, limit);
   res.json({
     ok: true,
     station: {
-      page: page,
-      limit: limit,
+      count,
+      page,
+      limit,
       order_by: orderBy,
       data: stationList
     }
   });
 });
+
+app.get('/api/station/count', (req, res) => {
+  const prepare = db.prepare(`SELECT count(*) as count FROM station`);
+  const {count} = prepare.get()
+  res.json({
+    ok: true,
+    count
+  })
+})
 
 app.get('/api/station/view', (req, res) => {
   const id = req.query.id;
