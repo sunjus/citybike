@@ -84,6 +84,19 @@ app.get('/api/station/list', (req, res) => {
   });
 });
 
+app.get('/api/station/view', (req, res) => {
+  const id = req.query.id;
+  const station = db.prepare('SELECT * FROM station WHERE id = ?').get(id);
+  const nDepartures = db.prepare('SELECT count(*) as count FROM journey WHERE departure_station_id = ?').get(id)?.count || 0;
+  const nReturns = db.prepare('SELECT count(*) as count FROM journey WHERE return_station_id = ?').get(id)?.count || 0;
+  res.json({
+    ok: true,
+    station: station,
+    number_of_departure: nDepartures,
+    number_of_return: nReturns
+  });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
