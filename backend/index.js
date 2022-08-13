@@ -31,6 +31,12 @@ const columnStation = [
   "y"
 ]
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.get('/api/journey/list', (req, res) => {
   let page = Number(req.query.page);
   if (isNaN(page) || !Number.isInteger(page) || page <= 0) {
