@@ -7,3 +7,12 @@ Also, there is a dataset that has information about Helsinki Region Transport’
 
 * Dataset: https://opendata.arcgis.com/datasets/726277c507ef4914b0aec3cbcfcbfafc_0.csv
 License and information: https://www.avoindata.fi/data/en/dataset/hsl-n-kaupunkipyoraasemat/resource/a23eef3a-cc40-4608-8aa2-c730d17e8902
+
+* Batch downloads
+```
+cd data
+wget https://opendata.arcgis.com/datasets/726277c507ef4914b0aec3cbcfcbfafc_0.csv
+wget https://dev.hsl.fi/citybikes/od-trips-2021/2021-05.csv
+wget https://dev.hsl.fi/citybikes/od-trips-2021/2021-06.csv
+wget https://dev.hsl.fi/citybikes/od-trips-2021/2021-07.csv
+```
