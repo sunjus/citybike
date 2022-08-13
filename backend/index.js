@@ -5,6 +5,16 @@ const db = new Database(dbPath);
 
 const app = express();
 const port = 3000;
+const columnJourney = [
+  "departure",
+  "return",
+  "departure_station_id",
+  "departure_station_name",
+  "return_station_id",
+  "return_station_name",
+  "distance",
+  "duration"
+]
 
 app.get('/api/journey/list', (req, res) => {
   let page = Number(req.query.page);
@@ -15,13 +25,19 @@ app.get('/api/journey/list', (req, res) => {
   if (isNaN(limit) || !Number.isInteger(limit) || limit <= 0) {
     limit = 100;
   }
-  const prepare = db.prepare('SELECT * FROM journey ORDER BY departure ASC LIMIT ?, ?');
+
+  let orderBy = req.query.orderby;
+  if (!columnJourney.includes(orderBy)) {
+    orderBy = 'departure';
+  }
+  const prepare = db.prepare(`SELECT * FROM journey ORDER BY ${orderBy} ASC LIMIT ?, ?`);
   const journeyList = prepare.all((page - 1) * limit, limit);
   res.json({
     ok: true,
     journey: {
         page: page,
         limit: limit,
+        order_by: orderBy,
         data: journeyList
     }
   });
