@@ -8,14 +8,20 @@ function getDateString(obj) {
   return v ? (new Date(v)).toISOString() : 'N/A';
 }
 
+function getDistanceString(obj) {
+  const v = obj.value;
+  if (!v) return 'N/A';
+  return `${(v/1000).toFixed(2)} km`
+}
+
 const journeyColumns = [
   { field: 'id', headerName: 'ID' },
   { field: 'departure', headerName: 'Departure', valueGetter: getDateString },  
-  { field: 'return', headerName: 'Return', valueGetter: getDateString },
-  { field: 'departure_station_name', headerName: 'Depareure Station' },
-  { field: 'return_station_name', headerName: 'Return Station' },
-  { field: 'distance', headerName: 'Distance [m]' },
-  { field: 'duration', headerName: 'Duration [s]' }
+  { field: 'return', headerName: 'Return', width: 200, valueGetter: getDateString },
+  { field: 'departure_station_name', headerName: 'Depareure Station', width: 150 },
+  { field: 'return_station_name', headerName: 'Return Station', width: 150 },
+  { field: 'distance', headerName: 'Distance', valueGetter: getDistanceString },
+  { field: 'duration', headerName: 'Duration [s]', valueGetter: (v) => `${v.value} s` }
 ];
 
 function App() {
