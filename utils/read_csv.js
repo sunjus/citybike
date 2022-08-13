@@ -1,7 +1,7 @@
 const fs = require("fs");
 const csv = require("csv");
 
-async function readCSVStations(csvPath) {
+function readCSVStations(csvPath) {
   const parser = fs
     .createReadStream(csvPath)
     .pipe(csv.parse({ from: 2 }))

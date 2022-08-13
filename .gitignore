@@ -104,3 +104,4 @@ dist
 .tern-port
 
 data/*.csv
+database/*.db 
