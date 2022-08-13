@@ -30,6 +30,12 @@ const columnStation = [
   "x",
   "y"
 ]
+const columnStationView = [
+  "name",
+  "osoite",
+  "number_of_departure",
+  "number_of_return"
+]
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -103,8 +109,8 @@ app.get('/api/station/count', (req, res) => {
   })
 })
 
-app.get('/api/station/view', (req, res) => {
-  const id = req.query.id;
+app.get('/api/station/view/:id', (req, res) => {
+  const { id } = req.params;
   const station = db.prepare('SELECT * FROM station WHERE id = ?').get(id);
   const nDepartures = db.prepare('SELECT count(*) as count FROM journey WHERE departure_station_id = ?').get(id)?.count || 0;
   const nReturns = db.prepare('SELECT count(*) as count FROM journey WHERE return_station_id = ?').get(id)?.count || 0;
