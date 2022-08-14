@@ -27,12 +27,20 @@ const StationView = () => {
   }, [station]);
 
   return (
-    <div>
-      <Container maxWidth="sm" height="80vh">
-        <Box sx={{ bgcolor: '#ffa4b3', height: '10vh' }}>Station Name:{station ? station?.station?.name : <div>Loading...</div>}</Box>
-        <Box sx={{ bgcolor: '#ffb1be', height: '10vh' }}>Address: {station ? station?.station?.osoite : <div>Loading...</div>}</Box>
-        <Box sx={{ bgcolor: '#ffc0cb', height: '10vh' }}>Total number of journeys starting from the station: {station ? station?.number_of_departure : <div>Loading...</div>}</Box>
-        <Box sx={{ bgcolor: '#ffd2d7', height: '10vh' }}>Total number of journeys ending at the station: {station ? station?.number_of_return : <div>Loading...</div>}</Box>
+    <div style={{height: '80vh', display: 'flex', justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
+      <Container maxWidth="sm" margin="20px">
+        <Box sx={{ bgcolor: '#ffa4b3', height: '10vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          Station Name:{station ? station?.station?.name : <div>Loading...</div>}
+        </Box>
+        <Box sx={{ bgcolor: '#ffb1be', height: '10vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          Address: {station ? station?.station?.osoite : <div>Loading...</div>}
+        </Box>
+        <Box sx={{ bgcolor: '#ffc0cb', height: '10vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          Total number of journeys starting from the station: {station ? station?.number_of_departure : <div>Loading...</div>}
+        </Box>
+        <Box sx={{ bgcolor: '#ffd2d7', height: '10vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          Total number of journeys ending at the station: {station ? station?.number_of_return : <div>Loading...</div>}
+        </Box>
       </Container>
     </div>
   );

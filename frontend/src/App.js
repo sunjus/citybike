@@ -1,5 +1,6 @@
 import { useState,useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import NavBar from './components/NavBar';
 import JourneyList from './components/JourneyList';
 import StationList from './components/StationList';
 import StationView from './components/StationView';
@@ -9,11 +10,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div className="App-header">
-          Citybike
+        <div className='App-header'>
+          <NavBar />
         </div>
         <Routes>
-          <Route path = '/journey' element = {<JourneyList />} />
+          <Route exact path = '/journey' element = {<JourneyList />} />
           <Route path = '/station' element = {<StationList />} />
           <Route path = '/station/:id' element = {<StationView />} />
         </Routes>
