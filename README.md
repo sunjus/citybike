@@ -59,5 +59,5 @@ wget https://dev.hsl.fi/citybikes/od-trips-2021/2021-07.csv
 * Station address
 * Total number of journeys starting from the station
 * Total number of journeys ending at the station
-<img width="1134" alt="stationview" src="https://user-images.githubusercontent.com/57226409/184532631-d03a7da9-2696-4963-8606-6fc2acdbaf68.png">
+<img width="1435" alt="stationview" src="https://user-images.githubusercontent.com/57226409/184534246-b3b266e5-fe13-47e5-8c56-786104428662.png">
  
