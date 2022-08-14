@@ -8,7 +8,7 @@ const StationView = () => {
   const [station, setStation] = useState(null);
   const [nDepartures, setNDepartures] = useState(0);
   const [nReturns, setNReturns] = useState(0);
-  const urlStationView = `http://localhost:3000/api/station/view?id=${id}`;
+  const urlStationView = `http://localhost:3000/api/station/view/${id}`;
   
   useEffect(() => {
     fetch(urlStationView)
