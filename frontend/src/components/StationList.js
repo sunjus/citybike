@@ -23,7 +23,7 @@ function usePagedData(url, setData) {
   
   useEffect(() => {
     console.log('DEBUG: ', `${url}?page=${page+1}&limit=${pageSize}`);
-    fetch(`${url}?page=${page}&limit=${pageSize}`)
+    fetch(`${url}?page=${page+1}&limit=${pageSize}`)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((err) => console.log(err))
